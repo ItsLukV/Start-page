@@ -94,7 +94,14 @@ class Cwindow {
     this.btn.style("width", `${40}px`);
     this.btn.mousePressed(() => {
       this.points.push(
-        new note(this.points.length, this.x, this.y, this.inp.value())
+        new note(
+          this.points.length,
+          this.x,
+          this.y,
+          this.w,
+          this.h,
+          this.inp.value()
+        )
       );
     });
     for (let i = 0; i < this.points.length; i++) {
@@ -172,30 +179,46 @@ class Cwindow {
         this.h = 200;
       }
     }
+    rect(this.x, this.y, this.w, this.h);
     this.header();
     for (let i = 0; i < this.points.length; i++) {
       this.points[i].update(this.x, this.y);
     }
-    rect(this.x, this.y, this.w, this.h);
   }
 
   note() {}
 }
 
 class note {
-  constructor(id, x, y, inp) {
+  constructor(id, x, y, w, h, inp) {
     this.id = id;
     this.x = x;
     this.y = y;
+    this.w = w;
+    this.h = h;
     this.inp = inp;
   }
 
   update(x, y) {
     this.x = x;
     this.y = y;
+    this.removebtn();
+    this.createText();
   }
 
   createText() {
-    text("*  " + this.inp, this.x + 5, this.y + 15 + 20 * this.id);
+    textSize(20);
+    text(
+      "*  " + this.inp,
+      this.x + 5,
+      this.y + 5 + 20 * this.id,
+      this.w - 5,
+      20
+    );
+  }
+
+  removebtn() {
+    line(this.x + this.w - 20, this.y + 5, this.x + this.w - 5, this.y + 20);
+    line(this.x + this.w - 5, this.y + 5, this.x + this.w - 20, this.y + 20);
   }
 }
