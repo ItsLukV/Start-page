@@ -160,7 +160,7 @@ class Cwindow {
     rect(this.x, this.y, this.w, this.h);
     this.header();
     for (let i = 0; i < this.points.length; i++) {
-      this.points[i].update(this.x, this.y, this.w, this.h);
+      this.points[i].update(this.x, this.y, this.w, this.h, i);
       this.points[i].createText("");
     }
   }
@@ -177,11 +177,12 @@ class note {
     this.createText();
   }
 
-  update(x, y, w, h) {
+  update(x, y, w, h, id) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
+    this.id = id;
     this.removebtn();
     this.createText();
   }
