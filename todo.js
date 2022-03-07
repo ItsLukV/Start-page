@@ -12,6 +12,14 @@ class Cwindow {
     this.points = [];
   }
 
+  showImg(img) {
+    this.img = img;
+    push();
+    imageMode(CENTER);
+    image(this.img, this.x + this.w / 2, this.y + this.h / 2);
+    pop();
+  }
+
   over() {
     if (
       mouseX > this.x &&
@@ -33,17 +41,9 @@ class Cwindow {
     for (let i = 0; i < this.points.length; i++) {
       if (this.points[i].pressed() !== undefined) {
         e = this.points[i].pressed();
-        console.log(this.points[i].pressed());
-        // let e = this.points.slice(this.points[i].pressed(), 1);
-        // this.points = e;
       }
     }
-    console.log(e);
-    console.log(this.points);
-    console.log(arr_remove(this.points, e));
-    // console.log(isNaN(e));
-    // if (isNaN(e)) {
-    // }
+    arrRemove(this.points, e);
 
     // Did I click on the rectangle?
     if (
@@ -97,9 +97,13 @@ class Cwindow {
     });
   }
 
-  header() {
+  header(txt, colr) {
     push();
-    fill(220);
+    if (colr === undefined) {
+      fill(220);
+    } else {
+      fill(colr);
+    }
     if (this.rollover) {
       fill(120);
     }
@@ -110,7 +114,7 @@ class Cwindow {
       fill(0);
     }
     textSize(20);
-    text("TO DO", this.x + 10, this.y - 5 / 2);
+    text(txt, this.x + 10, this.y - 5 / 2);
     if (
       mouseX > this.x + this.w - 20 &&
       mouseX < this.x + this.w - 5 &&
@@ -120,6 +124,7 @@ class Cwindow {
       this.close = true;
       stroke(255, 0, 0);
     }
+
     strokeWeight(2);
     line(this.x + this.w - 20, this.y - 10, this.x + this.w - 5, this.y - 10);
     pop();
@@ -152,7 +157,13 @@ class Cwindow {
     pop();
   }
 
-  update() {
+  update(mw, mh) {
+    if (mw === undefined) {
+      this.w = 200;
+    }
+    if (mh === undefined) {
+      this.h = 200;
+    }
     if (this.dragging) {
       this.x = mouseX + this.offsetX;
       this.y = mouseY + this.offsetY;
@@ -160,11 +171,11 @@ class Cwindow {
     if (this.sizeing) {
       this.w = mouseX - this.x;
       this.h = mouseY - this.y;
-      if (this.w <= 200) {
-        this.w = 200;
+      if (this.w <= mw) {
+        this.w = mw;
       }
-      if (this.h <= 200) {
-        this.h = 200;
+      if (this.h <= mh) {
+        this.h = mh;
       }
     }
     rect(this.x, this.y, this.w, this.h);
@@ -247,7 +258,6 @@ class note {
       mouseY < this.y + 20 + 20 * this.id
     ) {
       return this.id;
-      console.log(this.id);
     }
   }
 
