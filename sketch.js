@@ -25,3 +25,9 @@ function mousePressed() {
 function mouseReleased() {
   div.released();
 }
+
+function arr_remove(arr, x) {
+  if (x === undefined) return;
+  arr.splice(x, 1);
+  console.log(arr);
+}

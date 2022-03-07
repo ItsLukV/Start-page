@@ -29,12 +29,22 @@ class Cwindow {
   }
 
   pressed() {
-    for (let i = this.points.length - 1; i >= 0; i--) {
-      console.log(this.points[i].id);
-      let e = this.points[i].pressed();
-      this.points.splice(i, e);
-      //   this.points[i].pressed();
+    let e;
+    for (let i = 0; i < this.points.length; i++) {
+      if (this.points[i].pressed() !== undefined) {
+        e = this.points[i].pressed();
+        console.log(this.points[i].pressed());
+        // let e = this.points.slice(this.points[i].pressed(), 1);
+        // this.points = e;
+      }
     }
+    console.log(e);
+    console.log(this.points);
+    console.log(arr_remove(this.points, e));
+    // console.log(isNaN(e));
+    // if (isNaN(e)) {
+    // }
+
     // Did I click on the rectangle?
     if (
       mouseX > this.x &&
@@ -237,6 +247,7 @@ class note {
       mouseY < this.y + 20 + 20 * this.id
     ) {
       return this.id;
+      console.log(this.id);
     }
   }
 
