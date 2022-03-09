@@ -1,43 +1,48 @@
 let todo;
-let test;
-let img;
+let google;
+let c;
 
 // https://editor.p5js.org/icm/sketches/BkRHbimhm
-
-function preload() {
-  img = loadImage("src/google-logo.png");
-}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(220);
-  todo = new Cwindow(100, 100, 200, 200);
-  test = new Cwindow(300, 300, 272, 200);
+  todo = new Todo(100, 100, 200, 200);
+  google = new Gwindow(300, 300, 320, 230);
 }
 
 function draw() {
   resizeCanvas(windowWidth, windowHeight);
   background(200);
-  test.update(200, 200);
-  test.move();
-  test.over();
-  test.showImg(img);
+  google.update();
+  google.move();
+  google.logo("Google");
+  google.over();
+  google.header("GOOGLE");
+  google.cInput();
 
-  todo.update(272, 200);
-  todo.C_input(50, 50);
+  todo.update();
+  todo.CInput();
   todo.header("TO DO", "rgb(220,220,220)");
   todo.move();
   todo.over();
+
+  if (c) {
+    cursor("nwse-resize");
+    c = false;
+  } else {
+    cursor("default");
+  }
 }
 
 function mousePressed() {
   todo.pressed();
-  test.pressed();
+  google.pressed();
 }
 
 function mouseReleased() {
   todo.released();
-  test.released();
+  google.released();
 }
 
 function arrRemove(arr, x) {
