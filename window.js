@@ -8,13 +8,24 @@ class Cwindow {
     this.h = mh;
     this.offsetX = 0;
     this.offsetY = 0;
-    this.close = false;
+    this.Close = false;
+    this.oldx;
+    this.oldy;
+  }
+
+  close() {
+    if (this.Close) {
+      this.oldx = this.x;
+      this.oldy = this.y;
+      this.x = -10000;
+      this.y = -10000;
+    }
   }
 
   over() {
     if (
       mouseX > this.x &&
-      mouseX < this.x + this.w &&
+      mouseX < this.x + this.w - 20 &&
       mouseY > this.y - 20 &&
       mouseY < this.y
     ) {
@@ -28,7 +39,7 @@ class Cwindow {
     // Did I click on the rectangle?
     if (
       mouseX > this.x &&
-      mouseX < this.x + this.w &&
+      mouseX < this.x + this.w - 20 &&
       mouseY > this.y - 20 &&
       mouseY < this.y
     ) {
@@ -44,6 +55,16 @@ class Cwindow {
       mouseY < this.y + this.h
     ) {
       this.sizeing = true;
+    }
+
+    if (
+      mouseX > this.x + this.w - 20 &&
+      mouseX < this.x + this.w - 5 &&
+      mouseY > this.y - 20 &&
+      mouseY < this.y
+    ) {
+      this.Close = true;
+      this.close();
     }
   }
 
@@ -77,7 +98,6 @@ class Cwindow {
       mouseY > this.y - 20 &&
       mouseY < this.y
     ) {
-      this.close = true;
       stroke(255, 0, 0);
     }
 
