@@ -1,6 +1,6 @@
 let todo;
 let google;
-let c;
+let c; //ændre cursor
 
 // https://editor.p5js.org/icm/sketches/BkRHbimhm
 

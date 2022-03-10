@@ -28,6 +28,15 @@ class Todo extends Cwindow {
         )
       );
     });
+    if (this.Close) {
+      this.inp.style("scale", "0");
+      this.btn.style("display", "none");
+      this.btn.style("visibility", "hidden");
+    } else {
+      this.inp.style("scale", "1");
+      this.btn.style("display", "block");
+      this.btn.style("visibility", "visible");
+    }
   }
 
   over() {
@@ -67,6 +76,14 @@ class Todo extends Cwindow {
     ) {
       this.sizeing = true;
     }
+    if (
+      mouseX > this.x + this.w - 20 &&
+      mouseX < this.x + this.w - 5 &&
+      mouseY > this.y - 20 &&
+      mouseY < this.y
+    ) {
+      this.Close = !this.Close;
+    }
     {
       let e;
       for (let i = 0; i < this.points.length; i++) {
@@ -94,6 +111,7 @@ class Todo extends Cwindow {
       }
     }
     this.header();
+    if (this.Close) return;
     rect(this.x, this.y, this.w, this.h);
     if (this.dragging) {
       for (let i = 0; i < this.points.length; i++) {

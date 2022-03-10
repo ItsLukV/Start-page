@@ -13,15 +13,6 @@ class Cwindow {
     this.oldy;
   }
 
-  close() {
-    if (this.Close) {
-      this.oldx = this.x;
-      this.oldy = this.y;
-      this.x = -10000;
-      this.y = -10000;
-    }
-  }
-
   over() {
     if (
       mouseX > this.x &&
@@ -63,8 +54,7 @@ class Cwindow {
       mouseY > this.y - 20 &&
       mouseY < this.y
     ) {
-      this.Close = true;
-      this.close();
+      this.Close = !this.Close;
     }
   }
 
@@ -107,6 +97,9 @@ class Cwindow {
   }
 
   move() {
+    if (this.Close) {
+      return;
+    }
     if (
       mouseX > this.x + this.w - 20 &&
       mouseX < this.x + this.w - 5 &&
@@ -137,6 +130,8 @@ class Cwindow {
       this.x = mouseX + this.offsetX;
       this.y = mouseY + this.offsetY;
     }
+    this.header();
+    if (this.Close) return;
     if (this.sizeing) {
       this.w = mouseX - this.x;
       this.h = mouseY - this.y;
@@ -147,7 +142,8 @@ class Cwindow {
         this.h = this.mh;
       }
     }
-    rect(this.x, this.y, this.w, this.h);
-    this.header();
+    if (!this.Close) {
+      rect(this.x, this.y, this.w, this.h);
+    }
   }
 }

@@ -9,10 +9,12 @@ class Gwindow extends Cwindow {
   }
 
   logo(txt) {
-    push();
-    textSize(100);
-    text(txt, this.x + this.w / 2 - 160, this.y + 100);
-    pop();
+    if (!this.Close) {
+      push();
+      textSize(100);
+      text(txt, this.x + this.w / 2 - 160, this.y + 100);
+      pop();
+    }
   }
 
   cInput() {
@@ -22,6 +24,17 @@ class Gwindow extends Cwindow {
     this.sumbit.position(this.x + this.w / 2 - 50, this.y + 190);
     this.sumbit.style("font-size", "20px");
     this.sumbit.style("width", `${100}px`);
+    this.inp.style("background", "");
+
+    if (this.Close) {
+      this.inp.style("scale", "0");
+      this.sumbit.style("display", "none");
+      this.sumbit.style("visibility", "hidden");
+    } else {
+      this.inp.style("scale", "1");
+      this.sumbit.style("display", "block");
+      this.sumbit.style("visibility", "visible");
+    }
   }
 }
 
