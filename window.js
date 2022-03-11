@@ -13,6 +13,29 @@ class Cwindow {
     this.oldy;
   }
 
+  save() {
+    let obj = {
+      x: this.x,
+      y: this.y,
+      w: this.w,
+      h: this.h,
+      mw: this.mw,
+      mh: this.mh,
+      close: this.Close,
+    };
+    return obj;
+  }
+
+  load(obj) {
+    this.x = obj.x;
+    this.y = obj.y;
+    this.w = obj.w;
+    this.h = obj.h;
+    this.mw = obj.mw;
+    this.mh = obj.mh;
+    this.Close = obj.close;
+  }
+
   over() {
     if (
       mouseX > this.x &&

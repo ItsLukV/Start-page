@@ -6,6 +6,48 @@ class Todo extends Cwindow {
     this.btn = createButton("Add");
   }
 
+  load(obj) {
+    this.x = obj.x;
+    this.y = obj.y;
+    this.w = obj.w;
+    this.h = obj.h;
+    this.mw = obj.mw;
+    this.mh = obj.mh;
+    for (let i = 0; i < obj.arrayL; i++) {
+      this.points.push(
+        new note(
+          this.points.length,
+          this.x,
+          this.y,
+          this.w,
+          this.h,
+          this.inp.value()
+        )
+      );
+      this.points[i].load(obj.array[i]);
+    }
+    this.Close = obj.close;
+  }
+
+  save() {
+    let arr = [];
+    for (let i = 0; i < this.points.length; i++) {
+      arr[i] = this.points[i].save();
+    }
+    let obj = {
+      x: this.x,
+      y: this.y,
+      w: this.w,
+      h: this.h,
+      mw: this.mw,
+      mh: this.mh,
+      arrayL: this.points.length,
+      array: arr,
+      close: this.Close,
+    };
+    return obj;
+  }
+
   CInput(x, y) {
     this.inp.style("height", `${20}px`);
     this.inp.style("width", `${this.w - 70}px`);
@@ -134,7 +176,19 @@ class note {
     this.h = h;
     this.inp = inp;
     this.createText();
-    console.log(inp);
+  }
+
+  load(obj) {
+    this.id = obj.id;
+    this.inp = obj.inp;
+  }
+
+  save() {
+    let obj = {
+      id: this.id,
+      inp: this.inp,
+    };
+    return obj;
   }
 
   update(x, y, w, h, id) {
