@@ -8,7 +8,7 @@ class Cwindow {
     this.h = mh;
     this.offsetX = 0;
     this.offsetY = 0;
-    this.Close = false;
+    this.Close = true;
     this.oldx;
     this.oldy;
   }

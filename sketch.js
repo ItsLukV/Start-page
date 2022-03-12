@@ -9,15 +9,20 @@ let c; //ændre cursor
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(220);
-  windows[0] = new Todo(100, 100, 200, 200);
-  windows[1] = new Gwindow(300, 300, 320, 230);
-  windows[2] = new Time(700, 100, 200, 200);
+  windows[0] = new Todo(100, 100, 200, 200); //Todo list
+  windows[1] = new Gwindow(100, 125, 320, 230); //google
+  windows[2] = new Time(100, 150, 200, 200); //clork
 
-  windows[0].load(JSON.parse(localStorage.todo));
-  windows[1].load(JSON.parse(localStorage.google));
-  windows[2].load(JSON.parse(localStorage.tid));
+  try {
+    windows[0].load(JSON.parse(localStorage.todo));
+    windows[1].load(JSON.parse(localStorage.google));
+    windows[2].load(JSON.parse(localStorage.tid));
+  } catch (error) {
+    console.log("Først gang, programmet blev åbnet");
+  }
 }
 
+// let a = Date.now();
 function draw() {
   resizeCanvas(windowWidth, windowHeight);
   background(200);
@@ -38,6 +43,7 @@ function draw() {
   windows[2].move();
   windows[2].over();
   windows[2].header("TID");
+  windows[2].time();
 
   if (c) {
     cursor("nwse-resize");
