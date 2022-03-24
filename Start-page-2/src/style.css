@@ -1,0 +1,10 @@
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(220, 220, 220);
+  border: 2px solid black;
+}
+
+.header {
+  height: 20px;
+}
