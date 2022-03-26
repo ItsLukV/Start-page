@@ -1,3 +1,9 @@
+body {
+  font-size: 20px;
+  margin: none;
+  padding: none;
+}
+
 .box {
   width: 200px;
   height: 200px;
@@ -7,4 +13,24 @@
 
 .header {
   height: 20px;
+}
+
+.close {
+  background-color: transparent;
+  border: 1px solid black;
+}
+
+.close:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+input {
+  width: 130px;
+}
+
+.btnSubmit {
+  width: 20px;
+}
+
+ol {
 }
